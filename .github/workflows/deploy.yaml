@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: java-app-repo
+  ECR_REPOSITORY: github-ecs
   ECS_SERVICE: java-app-service
   ECS_CLUSTER: java-app-cluster
   ECS_TASK_DEFINITION: java-app-task
