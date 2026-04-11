@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  AWS_REGION: ap-south-1
+  AWS_REGION: us-east-1
   ECR_REPOSITORY: java-app-repo
   ECS_SERVICE: java-app-service
   ECS_CLUSTER: java-app-cluster
