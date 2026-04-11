@@ -1,4 +1,4 @@
-name: Deploy to ECS
+name: Deploy to ECS using GA
 
 on:
   push:
@@ -15,6 +15,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
     - name: Checkout
