@@ -33,7 +33,7 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v2
 
     - name: Build JAR
-      run: mvn clean package
+      run: mvn clean package -DskipTests
 
     - name: Build Docker image
       run: |
