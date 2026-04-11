@@ -41,13 +41,13 @@ jobs:
 
     - name: Tag image
       run: |
-        docker tag $ECR_REPOSITORY:{{ github.sha }} \
-        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:{{ github.sha }}
+        docker tag $ECR_REPOSITORY:${{ github.sha }} \
+        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:${{ github.sha }}
 
     - name: Push image
       run: |
         docker push \
-        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:{{ github.sha }}
+        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:${{ github.sha }}
 
     - name: Download task definition
       run: |
@@ -57,7 +57,7 @@ jobs:
 
     - name: Update image in task definition
       run: |
-        jq '.containerDefinitions[0].image = "${{ steps.login-ecr.outputs.registry }}/'$ECR_REPOSITORY':{{ github.sha }}"' \
+        jq '.containerDefinitions[0].image = "${{ steps.login-ecr.outputs.registry }}/'$ECR_REPOSITORY':${{ github.sha }}"' \
         task-definition.json > new-task-definition.json
 
     - name: Register new task definition
