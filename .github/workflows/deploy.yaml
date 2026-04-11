@@ -8,9 +8,9 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: github-ecs
-  ECS_SERVICE: java-app-service
-  ECS_CLUSTER: java-app-cluster
-  ECS_TASK_DEFINITION: java-app-task
+  ECS_SERVICE: spc-ecs-app-service
+  ECS_CLUSTER: spc-ecs
+  ECS_TASK_DEFINITION: spc-ecs-task-def
 
 jobs:
   deploy:
@@ -42,12 +42,12 @@ jobs:
     - name: Tag image
       run: |
         docker tag $ECR_REPOSITORY:latest \
-        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest
+        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:{{ github.sha }}
 
     - name: Push image
       run: |
         docker push \
-        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:latest
+        ${{ steps.login-ecr.outputs.registry }}/$ECR_REPOSITORY:{{ github.sha }}
 
     - name: Download task definition
       run: |
@@ -57,7 +57,7 @@ jobs:
 
     - name: Update image in task definition
       run: |
-        jq '.containerDefinitions[0].image = "${{ steps.login-ecr.outputs.registry }}/'$ECR_REPOSITORY':latest"' \
+        jq '.containerDefinitions[0].image = "${{ steps.login-ecr.outputs.registry }}/'$ECR_REPOSITORY':{{ github.sha }}"' \
         task-definition.json > new-task-definition.json
 
     - name: Register new task definition
