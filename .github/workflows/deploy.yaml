@@ -9,7 +9,7 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: github-ecs
-  ECS_SERVICE: spc-ecs-task-def-svc
+  ECS_SERVICE: spc-ecs-svc
   ECS_CLUSTER: spc-cluster
   ECS_TASK_DEFINITION: spc-ecs-task-def
 
