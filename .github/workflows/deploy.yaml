@@ -8,14 +8,13 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: github-ecs
-  ECS_SERVICE: spc-ecs-app-service
-  ECS_CLUSTER: spc-ecs
+  ECS_SERVICE: spc-app-service
+  ECS_CLUSTER: spc-cluster
   ECS_TASK_DEFINITION: spc-ecs-task-def
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
 
     steps:
     - name: Checkout
