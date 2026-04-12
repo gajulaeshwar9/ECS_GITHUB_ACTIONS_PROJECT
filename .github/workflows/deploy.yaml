@@ -8,7 +8,7 @@ on:
 env:
   AWS_REGION: us-east-1
   ECR_REPOSITORY: github-ecs
-  ECS_SERVICE: spc-app-service
+  ECS_SERVICE: spc-ecs-task-def-svc
   ECS_CLUSTER: spc-cluster
   ECS_TASK_DEFINITION: spc-ecs-task-def
 
@@ -54,7 +54,7 @@ jobs:
           --task-definition $ECS_TASK_DEFINITION \
           --query taskDefinition \
           --output json > raw-task-definition.json
-          
+
         jq 'del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)' \
           raw-task-definition.json > task-definition.json
 
